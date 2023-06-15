@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { SubCategoryResolver } from './sub-category.resolver';
-import { SubCategoryService } from '../sub-category.service';
+import { SubCategoryService } from '../service/sub-category.service';
 
 describe('SubCategoryResolver', () => {
   let resolver: SubCategoryResolver;

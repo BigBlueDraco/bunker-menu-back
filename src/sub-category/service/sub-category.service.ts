@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { CreateSubCategoryInput } from './dto/create-sub-category.input';
-import { UpdateSubCategoryInput } from './dto/update-sub-category.input';
+import { CreateSubCategoryInput } from '../dto/create-sub-category.input';
+import { UpdateSubCategoryInput } from '../dto/update-sub-category.input';
 
 @Injectable()
 export class SubCategoryService {
