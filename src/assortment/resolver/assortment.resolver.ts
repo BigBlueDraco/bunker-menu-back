@@ -1,8 +1,8 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
-import { AssortmentService } from './assortment.service';
-import { Assortment } from './entities/assortment.entity';
-import { CreateAssortmentInput } from './dto/create-assortment.input';
-import { UpdateAssortmentInput } from './dto/update-assortment.input';
+import { AssortmentService } from '../service/assortment.service';
+import { Assortment } from '../entities/assortment.entity';
+import { CreateAssortmentInput } from '../dto/create-assortment.input';
+import { UpdateAssortmentInput } from '../dto/update-assortment.input';
 
 @Resolver(() => Assortment)
 export class AssortmentResolver {

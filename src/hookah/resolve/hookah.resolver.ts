@@ -1,8 +1,8 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
-import { HookahService } from './hookah.service';
-import { Hookah } from './entities/hookah.entity';
-import { CreateHookahInput } from './dto/create-hookah.input';
-import { UpdateHookahInput } from './dto/update-hookah.input';
+import { HookahService } from '../service/hookah.service';
+import { Hookah } from '../entities/hookah.entity';
+import { CreateHookahInput } from '../dto/create-hookah.input';
+import { UpdateHookahInput } from '../dto/update-hookah.input';
 
 @Resolver(() => Hookah)
 export class HookahResolver {

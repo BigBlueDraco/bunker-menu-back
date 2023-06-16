@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { AssortmentService } from './assortment.service';
-import { AssortmentResolver } from './assortment.resolver';
+import { AssortmentService } from './service/assortment.service';
+import { AssortmentResolver } from './resolver/assortment.resolver';
 
 @Module({
   providers: [AssortmentResolver, AssortmentService]

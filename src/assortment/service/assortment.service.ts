@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { CreateAssortmentInput } from './dto/create-assortment.input';
-import { UpdateAssortmentInput } from './dto/update-assortment.input';
+import { CreateAssortmentInput } from '../dto/create-assortment.input';
+import { UpdateAssortmentInput } from '../dto/update-assortment.input';
 
 @Injectable()
 export class AssortmentService {
