@@ -1,0 +1,89 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Assortment {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Category {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input CreateAssortmentInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input CreateCategoryInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input CreateHookahInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input CreateSubCategoryInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Hookah {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Mutation {
+  createAssortment(createAssortmentInput: CreateAssortmentInput!): Assortment!
+  createCategory(createCategoryInput: CreateCategoryInput!): Category!
+  createHookah(createHookahInput: CreateHookahInput!): Hookah!
+  createSubCategory(createSubCategoryInput: CreateSubCategoryInput!): SubCategory!
+  removeAssortment(id: Int!): Assortment!
+  removeCategory(id: Int!): Category!
+  removeHookah(id: Int!): Hookah!
+  removeSubCategory(id: Int!): SubCategory!
+  updateAssortment(updateAssortmentInput: UpdateAssortmentInput!): Assortment!
+  updateCategory(updateCategoryInput: UpdateCategoryInput!): Category!
+  updateHookah(updateHookahInput: UpdateHookahInput!): Hookah!
+  updateSubCategory(updateSubCategoryInput: UpdateSubCategoryInput!): SubCategory!
+}
+
+type Query {
+  assortment(id: Int!): Assortment!
+  category(id: Int!): Category!
+  hookah(id: Int!): Hookah!
+  subCategory(id: Int!): SubCategory!
+}
+
+type SubCategory {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateAssortmentInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input UpdateCategoryInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input UpdateHookahInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input UpdateSubCategoryInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
