@@ -23,8 +23,9 @@ input CreateCategoryInput {
 }
 
 input CreateHookahInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  mainCategoryId: Int!
+  name: String!
+  price: Int!
 }
 
 input CreateSubCategoryInput {
@@ -33,8 +34,11 @@ input CreateSubCategoryInput {
 }
 
 type Hookah {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  id: Int!
+  mainCategory: Category!
+  mainCategoryId: Int!
+  name: String!
+  price: Int!
 }
 
 type Mutation {
@@ -77,9 +81,10 @@ input UpdateCategoryInput {
 }
 
 input UpdateHookahInput {
-  """Example field (placeholder)"""
-  exampleField: Int
   id: Int!
+  mainCategoryId: Int
+  name: String
+  price: Int
 }
 
 input UpdateSubCategoryInput {

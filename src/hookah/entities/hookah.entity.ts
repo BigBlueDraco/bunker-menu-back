@@ -1,7 +1,18 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { Category } from 'src/category/entities/category.entity';
 
 @ObjectType()
 export class Hookah {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+  @Field(() => Int)
+  id: number;
+
+  @Field(() => String)
+  name: string;
+  @Field(() => Int)
+  price: number;
+
+  @Field(() => Int)
+  mainCategoryId: number;
+  @Field(() => Category)
+  mainCategory: Category;
 }
