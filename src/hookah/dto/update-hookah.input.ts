@@ -1,8 +1,12 @@
+import { Field, InputType, Int, PartialType } from '@nestjs/graphql';
+import { IsInt, IsNotEmpty, IsPositive } from 'class-validator';
 import { CreateHookahInput } from './create-hookah.input';
-import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
 
 @InputType()
 export class UpdateHookahInput extends PartialType(CreateHookahInput) {
+  @IsInt()
+  @IsPositive()
+  @IsNotEmpty()
   @Field(() => Int)
   id: number;
 }
