@@ -8,8 +8,11 @@ type Assortment {
 }
 
 type Category {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  """Category ID field"""
+  id: Int!
+
+  """Category name field"""
+  name: String!
 }
 
 input CreateAssortmentInput {
@@ -18,8 +21,8 @@ input CreateAssortmentInput {
 }
 
 input CreateCategoryInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  """Category name field"""
+  name: String!
 }
 
 input CreateHookahInput {
@@ -54,7 +57,8 @@ type Mutation {
 
 type Query {
   assortment(id: Int!): Assortment!
-  category(id: Int!): Category!
+  getAllCategories: [Category!]!
+  getCategory(id: Int!): Category!
   hookah(id: Int!): Hookah!
   subCategory(id: Int!): SubCategory!
 }
@@ -71,9 +75,10 @@ input UpdateAssortmentInput {
 }
 
 input UpdateCategoryInput {
-  """Example field (placeholder)"""
-  exampleField: Int
   id: Int!
+
+  """Category name field"""
+  name: String
 }
 
 input UpdateHookahInput {

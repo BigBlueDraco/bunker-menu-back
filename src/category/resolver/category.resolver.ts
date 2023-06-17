@@ -10,17 +10,16 @@ export class CategoryResolver {
 
   @Mutation(() => Category)
   createCategory(
-    @Args('createCategoryInput') createCategoryInput: CreateCategoryInput,
-  ) {
+    @Args('createCategoryInput') createCategoryInput: CreateCategoryInput) {
     return this.categoryService.create(createCategoryInput);
   }
 
-  @Query(() => [Category], { name: 'category' })
+  @Query(() => [Category], { name: 'getAllCategories' })
   findAll() {
     return this.categoryService.findAll();
   }
 
-  @Query(() => Category, { name: 'category' })
+  @Query(() => Category, { name: 'getCategory' })
   findOne(@Args('id', { type: () => Int }) id: number) {
     return this.categoryService.findOne(id);
   }
