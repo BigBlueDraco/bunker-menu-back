@@ -59,7 +59,8 @@ type Mutation {
 type Query {
   assortment(id: Int!): Assortment!
   category(id: Int!): Category!
-  hookah(id: Int!): Hookah!
+  getAllHookah: [Hookah!]!
+  getHookah(id: Int!): Hookah!
   subCategory(id: Int!): SubCategory!
 }
 

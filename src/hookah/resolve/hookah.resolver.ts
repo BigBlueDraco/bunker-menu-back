@@ -9,22 +9,26 @@ export class HookahResolver {
   constructor(private readonly hookahService: HookahService) {}
 
   @Mutation(() => Hookah)
-  createHookah(@Args('createHookahInput') createHookahInput: CreateHookahInput) {
+  createHookah(
+    @Args('createHookahInput') createHookahInput: CreateHookahInput,
+  ) {
     return this.hookahService.create(createHookahInput);
   }
 
-  @Query(() => [Hookah], { name: 'hookah' })
+  @Query(() => [Hookah], { name: 'getAllHookah' })
   findAll() {
     return this.hookahService.findAll();
   }
 
-  @Query(() => Hookah, { name: 'hookah' })
+  @Query(() => Hookah, { name: 'getHookah' })
   findOne(@Args('id', { type: () => Int }) id: number) {
     return this.hookahService.findOne(id);
   }
 
   @Mutation(() => Hookah)
-  updateHookah(@Args('updateHookahInput') updateHookahInput: UpdateHookahInput) {
+  updateHookah(
+    @Args('updateHookahInput') updateHookahInput: UpdateHookahInput,
+  ) {
     return this.hookahService.update(updateHookahInput.id, updateHookahInput);
   }
 
