@@ -5,22 +5,27 @@ import { Category } from '../entities/category.entity';
 import { CreateCategoryInput } from '../dto/create-category.input';
 import { UpdateCategoryInput } from '../dto/update-category.input';
 import {PrismaService} from "../../prisma/service/prisma.service";
+import {PrismaModule} from "../../prisma/prisma.module";
 
 describe('CategoryResolver', () => {
   let categoryResolver: CategoryResolver;
   let categoryService: CategoryService;
+  let prismaService: PrismaService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [CategoryResolver, CategoryService, PrismaService],
+      imports:[PrismaModule]
     }).compile();
 
     categoryResolver = module.get<CategoryResolver>(CategoryResolver);
     categoryService = module.get<CategoryService>(CategoryService);
+    prismaService = module.get<PrismaService>(PrismaService)
   });
 
   describe('createCategory', () => {
     it('should create a new category', async () => {
+
       const createCategoryInput: CreateCategoryInput = {
         name: 'Test Category',
       };
@@ -89,6 +94,7 @@ describe('CategoryResolver', () => {
 
   describe('removeCategory', () => {
     it('should remove a category by id', async () => {
+
       const categoryId = 1;
       const removedCategory: Category = { id: categoryId, name: 'Removed Category' };
       jest.spyOn(categoryService, 'remove').mockResolvedValue(removedCategory);
