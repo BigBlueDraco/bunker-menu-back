@@ -1,15 +1,14 @@
-import { Prisma, PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
+import dataBaseMock from './mockData/mockData';
 
 const prismaClient = new PrismaClient();
 
 async function main() {
-  await prismaClient.$queryRaw`DELETE  FROM "Category" CASCADE`;
-
   console.log('seeding...');
-  await prismaClient.category.create({
-    data: {
-      name: 'Seed name 123',
-    },
+  dataBaseMock.dataBaseMock.forEach(async (elem) => {
+    await prismaClient.category.create({
+      data: elem,
+    });
   });
 }
 main()

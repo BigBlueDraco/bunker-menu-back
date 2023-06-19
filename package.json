@@ -21,6 +21,7 @@
     "test:db": "npx prisma migrate reset && npm run test:watch"
   },
   "dependencies": {
+    "@faker-js/faker": "^8.0.2",
     "@nestjs/apollo": "^12.0.1",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^3.0.0",
@@ -30,7 +31,7 @@
     "@nestjs/platform-express": "^9.0.0",
     "@prisma/client": "^4.15.0",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.2.0"
+    "shortid": "^2.2.16"
   },
   "devDependencies": {
     "@nestjs/cli": "^9.0.0",
