@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
+import { GraphQLError } from 'graphql';
+
 import { CreateHookahInput } from '../dto/create-hookah.input';
 import { UpdateHookahInput } from '../dto/update-hookah.input';
-import { PrismaService } from 'src/prisma/service/prisma.service';
-import { GraphQLError } from 'graphql';
+import { PrismaService } from '../../prisma/service/prisma.service';
 
 @Injectable()
 export class HookahService {
