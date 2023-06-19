@@ -1,15 +1,29 @@
 import { PrismaClient } from '@prisma/client';
-import { dataBaseMock } from './mockData/mockData';
+import { readMockData, generateMockData } from './mockData/mockDataControler';
 
 const prismaClient = new PrismaClient();
-
-async function main() {
-  console.log('seeding...');
-  dataBaseMock.forEach(async (elem) => {
+function setDataToDB(data: any[]) {
+  console.log('Setting data to db');
+  data.forEach(async (elem) => {
     await prismaClient.category.create({
       data: elem,
     });
   });
+}
+async function main() {
+  console.log('seeding...');
+  console.log('Reading mock data');
+  const existMock = readMockData();
+
+  if (existMock === undefined) {
+    console.log('Mock data dosent exxist');
+    console.log('Generating MockData');
+    generateMockData();
+    const data = readMockData();
+    setDataToDB(data);
+    return;
+  }
+  setDataToDB(existMock);
 }
 main()
   .catch((e) => {
