@@ -1,4 +1,5 @@
 import { faker } from '@faker-js/faker';
+import { writeFileSync } from 'fs';
 const shortid = require('shortid');
 
 const assortmentFirstDish = [];
@@ -44,8 +45,7 @@ const hookahMock = [
   { name: 'medium', price: 290 },
   { name: 'dark', price: 300 },
 ];
-
-export const dataBaseMock = [
+const data = [
   {
     name: 'Hookah',
     hookahs: {
@@ -59,3 +59,7 @@ export const dataBaseMock = [
     },
   },
 ];
+
+writeFileSync('./prisma/mockData/mockData.mock.json', JSON.stringify(data), 'utf8');
+
+export const dataBaseMock = [...data];

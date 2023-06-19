@@ -1,11 +1,11 @@
 import { PrismaClient } from '@prisma/client';
-import dataBaseMock from './mockData/mockData';
+import { dataBaseMock } from './mockData/mockData';
 
 const prismaClient = new PrismaClient();
 
 async function main() {
   console.log('seeding...');
-  dataBaseMock.dataBaseMock.forEach(async (elem) => {
+  dataBaseMock.forEach(async (elem) => {
     await prismaClient.category.create({
       data: elem,
     });
