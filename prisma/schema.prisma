@@ -23,7 +23,7 @@ model Category{
 model SubCategory{
   id Int @id @default(autoincrement())
   mainCategoryId Int
-  mainCategory Category @relation(fields: [mainCategoryId], references: [id])
+  mainCategory Category @relation(fields: [mainCategoryId], references: [id], onDelete: Cascade)
   assortment Assortment[]
 
   name String
@@ -32,7 +32,7 @@ model SubCategory{
 model Assortment{
   id Int @id @default(autoincrement())
   subCategoryId Int
-  subCategory SubCategory @relation(fields: [subCategoryId], references: [id])
+  subCategory SubCategory @relation(fields: [subCategoryId], references: [id], onDelete: Cascade)
 
   name String @unique
   description String 
@@ -42,7 +42,7 @@ model Assortment{
 model Hookah{
   id Int @id @default(autoincrement())
   mainCategoryId Int 
-  mainCategory Category @relation(fields: [mainCategoryId], references: [id])
+  mainCategory Category @relation(fields: [mainCategoryId], references: [id], onDelete: Cascade)
 
   name String @unique
   price Int 
