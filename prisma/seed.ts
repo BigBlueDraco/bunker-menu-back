@@ -1,5 +1,8 @@
 import { PrismaClient } from '@prisma/client';
-import { readMockData, generateMockData } from './mockData/mockDataControler';
+import {
+  readMockDataFile,
+  generateMockDataFile,
+} from './mockData/mockDataControler';
 
 const prismaClient = new PrismaClient();
 function setDataToDB(data: any[]) {
@@ -13,13 +16,13 @@ function setDataToDB(data: any[]) {
 async function main() {
   console.log('seeding...');
   console.log('Reading mock data');
-  const existMock = readMockData();
+  const existMock = readMockDataFile();
 
   if (existMock === undefined) {
     console.log('Mock data dosent exxist');
     console.log('Generating MockData');
-    generateMockData();
-    const data = readMockData();
+    generateMockDataFile();
+    const data = readMockDataFile();
     setDataToDB(data);
     return;
   }

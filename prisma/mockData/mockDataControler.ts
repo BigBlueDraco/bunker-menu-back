@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker';
 import { writeFileSync, readFileSync } from 'fs';
 const shortid = require('shortid');
 
-export function generateMockData() {
+export function generateMockDataFile() {
   const assortmentFirstDish = [];
   const assortmentSecondDishMock = [];
   const assortmentDessertDishMock = [];
@@ -47,15 +47,15 @@ export function generateMockData() {
     { name: 'dark', price: 300 },
   ];
 
-  saveMockData([
+  saveMockDataFile([
     {
-      name: 'Hookah',
+      name: 'hookah',
       hookahs: {
         create: hookahMock,
       },
     },
     {
-      name: 'Kithen',
+      name: 'kithen',
       subCategories: {
         create: subCategoryMock,
       },
@@ -63,7 +63,7 @@ export function generateMockData() {
   ]);
 }
 
-export function saveMockData(data: any) {
+export function saveMockDataFile(data: any) {
   writeFileSync(
     './prisma/mockData/MockData.mock.json',
     JSON.stringify(data),
@@ -71,7 +71,7 @@ export function saveMockData(data: any) {
   );
 }
 
-export function readMockData(): any | undefined {
+export function readMockDataFile(): any | undefined {
   try {
     const data = readFileSync('./prisma/mockData/MockData.mock.json', 'utf8');
     return JSON.parse(data);
