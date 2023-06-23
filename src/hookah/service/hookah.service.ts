@@ -11,12 +11,10 @@ export class HookahService {
   async create(createHookahInput: CreateHookahInput) {
     const { name, ...rest } = createHookahInput;
     const exsitUser = await this.prosmaService.hookah.findUnique({
-      where: { name: createHookahInput.name.toLowerCase() },
+      where: { name: name.toLowerCase() },
     });
     if (exsitUser) {
-      throw new GraphQLError(
-        `Hookah with name: "${createHookahInput.name}" alredy exist`,
-      );
+      throw new GraphQLError(`Hookah with name: "${name}" alredy exist`);
     }
 
     return await this.prosmaService.hookah.create({
