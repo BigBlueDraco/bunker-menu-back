@@ -4,8 +4,8 @@ import { CategoryService } from '../service/category.service';
 import { Category } from '../entities/category.entity';
 import { CreateCategoryInput } from '../dto/create-category.input';
 import { UpdateCategoryInput } from '../dto/update-category.input';
-import {PrismaService} from "../../prisma/service/prisma.service";
-import {PrismaModule} from "../../prisma/prisma.module";
+import { PrismaService } from '../../prisma/service/prisma.service';
+import { PrismaModule } from '../../prisma/prisma.module';
 
 describe('CategoryResolver', () => {
   let categoryResolver: CategoryResolver;
@@ -15,17 +15,16 @@ describe('CategoryResolver', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [CategoryResolver, CategoryService, PrismaService],
-      imports:[PrismaModule]
+      imports: [PrismaModule],
     }).compile();
 
     categoryResolver = module.get<CategoryResolver>(CategoryResolver);
     categoryService = module.get<CategoryService>(CategoryService);
-    prismaService = module.get<PrismaService>(PrismaService)
+    prismaService = module.get<PrismaService>(PrismaService);
   });
 
   describe('createCategory', () => {
     it('should create a new category', async () => {
-
       const createCategoryInput: CreateCategoryInput = {
         name: 'Test Category',
       };
@@ -85,8 +84,8 @@ describe('CategoryResolver', () => {
       const result = await categoryResolver.updateCategory(updateCategoryInput);
 
       expect(categoryService.update).toHaveBeenCalledWith(
-          updateCategoryInput.id,
-          updateCategoryInput
+        updateCategoryInput.id,
+        updateCategoryInput,
       );
       expect(result).toEqual(updatedCategory);
     });
@@ -94,9 +93,11 @@ describe('CategoryResolver', () => {
 
   describe('removeCategory', () => {
     it('should remove a category by id', async () => {
-
       const categoryId = 1;
-      const removedCategory: Category = { id: categoryId, name: 'Removed Category' };
+      const removedCategory: Category = {
+        id: categoryId,
+        name: 'Removed Category',
+      };
       jest.spyOn(categoryService, 'remove').mockResolvedValue(removedCategory);
 
       const result = await categoryResolver.removeCategory(categoryId);

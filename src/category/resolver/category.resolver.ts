@@ -10,7 +10,8 @@ export class CategoryResolver {
 
   @Mutation(() => Category)
   createCategory(
-    @Args('createCategoryInput') createCategoryInput: CreateCategoryInput) {
+    @Args('createCategoryInput') createCategoryInput: CreateCategoryInput,
+  ) {
     return this.categoryService.create(createCategoryInput);
   }
 
@@ -28,10 +29,7 @@ export class CategoryResolver {
   updateCategory(
     @Args('updateCategoryInput') updateCategoryInput: UpdateCategoryInput,
   ) {
-    return this.categoryService.update(
-      updateCategoryInput.id,
-      updateCategoryInput,
-    );
+    return this.categoryService.update(updateCategoryInput);
   }
 
   @Mutation(() => Category)

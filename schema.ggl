@@ -31,8 +31,11 @@ input CreateHookahInput {
 }
 
 input CreateSubCategoryInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  """Category Id  field"""
+  mainCategoryId: Float!
+
+  """SubCategory name field"""
+  name: String!
 }
 
 type Hookah {
@@ -58,14 +61,21 @@ type Mutation {
 type Query {
   assortment(id: Int!): Assortment!
   getAllCategories: [Category!]!
+  getAllSubCategories: [SubCategory!]!
   getCategory(id: Int!): Category!
+  getSubCategory(id: Int!): SubCategory!
   hookah(id: Int!): Hookah!
-  subCategory(id: Int!): SubCategory!
 }
 
 type SubCategory {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  """SubCategory ID field"""
+  id: Int!
+
+  """Category ID field"""
+  mainCategoryId: Int!
+
+  """Category name field"""
+  name: String!
 }
 
 input UpdateAssortmentInput {
@@ -75,10 +85,11 @@ input UpdateAssortmentInput {
 }
 
 input UpdateCategoryInput {
+  """Category Id field"""
   id: Int!
 
   """Category name field"""
-  name: String
+  name: String!
 }
 
 input UpdateHookahInput {
@@ -88,7 +99,12 @@ input UpdateHookahInput {
 }
 
 input UpdateSubCategoryInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  """MainCategoryId field"""
   id: Int!
+
+  """Category Id  field"""
+  mainCategoryId: Float
+
+  """SubCategory name field"""
+  name: String!
 }
