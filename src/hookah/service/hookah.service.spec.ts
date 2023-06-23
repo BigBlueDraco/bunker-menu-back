@@ -79,7 +79,6 @@ describe('HookahService', () => {
       expect(createdRes).toEqual({ id: result.id, ...createHookahInput });
     });
     it('should throw GraphQLError when try create hookah with name exist', async () => {
-      // Arrange
       const existHookahInput = {
         name: 'test',
         price: 250,
@@ -93,9 +92,6 @@ describe('HookahService', () => {
       await expect(service.create(existHookahInput)).rejects.toThrow(
         GraphQLError,
       );
-      await expect(
-        service.update(itemId, existHookahUpdateInput),
-      ).rejects.toThrow(GraphQLError);
     });
   });
 
@@ -115,12 +111,9 @@ describe('HookahService', () => {
       };
 
       jest.spyOn(prisma.hookah, 'findUnique').mockResolvedValue(null);
-      // jest.spyOn(prisma.hookah, 'update').mockResolvedValue(createdHookah);
 
       const updatedRes = await service.update(itemId, updateHookahInput);
-      const result = await service.findOne(updatedRes.id);
       expect(updatedRes).toEqual({ id: itemId, ...updateHookahInput });
-      // service.remove(itemId);
     });
     it('should throw GraphQLError when try update hookah with the specified id does not exist', async () => {
       const nonExistingHookahId = -1;

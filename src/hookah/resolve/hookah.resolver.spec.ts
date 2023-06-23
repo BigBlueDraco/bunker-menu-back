@@ -6,10 +6,12 @@ import { HookahService } from '../service/hookah.service';
 import { PrismaService } from '../../prisma/service/prisma.service';
 import { PrismaModule } from '../../prisma/prisma.module';
 import { readMockDataFile } from '../../../prisma/mockData/mockDataControler';
+import { UpdateHookahInput } from '../dto/update-hookah.input';
 
 describe('HookahResolver', () => {
   let resolver: HookahResolver;
   let mock;
+  let itemId;
 
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -56,17 +58,81 @@ describe('HookahResolver', () => {
   });
 
   describe('createHookah', () => {
-    it('should create a hookah', async () => {});
-    it('should throw GraphQLError when try create hookah with name exist', async () => {});
+    it('should create a hookah', async () => {
+      const createHookahInput = {
+        name: 'test',
+        price: 250,
+        mainCategoryId: 1,
+      };
+
+      const createdHookah = {
+        id: 4,
+        mainCategoryId: 1,
+        ...createHookahInput,
+      };
+
+      const createdRes = await resolver.createHookah(createHookahInput);
+      const result = await resolver.findOne(createdRes.id);
+      itemId = createdRes.id;
+      expect(createdRes).toEqual({ id: result.id, ...createHookahInput });
+    });
+    it('should throw GraphQLError when try create hookah with name exist', async () => {
+      const existHookahInput = {
+        name: 'test',
+        price: 250,
+        mainCategoryId: 1,
+      };
+      await expect(resolver.createHookah(existHookahInput)).rejects.toThrow(
+        GraphQLError,
+      );
+    });
   });
 
   describe('updateHookah', () => {
-    it('should update a hookah', async () => {});
-    it('should throw GraphQLError when try update hookah with the specified id does not exist', async () => {});
+    it('should update a hookah', async () => {
+      const updateHookahInput: UpdateHookahInput = {
+        id: itemId,
+        name: 'updateTest',
+        price: 250,
+        mainCategoryId: 1,
+      };
+
+      const updatedRes = await resolver.updateHookah(updateHookahInput);
+      expect(updatedRes).toEqual({ id: itemId, ...updateHookahInput });
+    });
+    it('should throw GraphQLError when try update hookah with the specified id does not exist', async () => {
+      const nonExistingHookahId = -1;
+      const updateHookahInput: UpdateHookahInput = {
+        id: nonExistingHookahId,
+        name: 'updateTest',
+        price: 250,
+        mainCategoryId: 1,
+      };
+
+      await expect(resolver.updateHookah(updateHookahInput)).rejects.toThrow(
+        GraphQLError,
+      );
+    });
   });
 
   describe('removeHookah', () => {
-    it('should remove a hookah', async () => {});
-    it('should throw GraphQLError when try remove hookah with the specified id does not exist', async () => {});
+    it('should remove a hookah', async () => {
+      const removeHookahInput: UpdateHookahInput = {
+        id: itemId,
+        name: 'updateTest',
+        price: 250,
+        mainCategoryId: 1,
+      };
+
+      const removedRes = await resolver.removeHookah(itemId);
+      expect(removedRes).toEqual({ id: itemId, ...removeHookahInput });
+    });
+    it('should throw GraphQLError when try remove hookah with the specified id does not exist', async () => {
+      const nonExistingHookahId = -1;
+
+      await expect(resolver.removeHookah(nonExistingHookahId)).rejects.toThrow(
+        GraphQLError,
+      );
+    });
   });
 });
