@@ -18,7 +18,7 @@ async function main() {
   console.log('Reading mock data');
   const existMock = readMockDataFile();
 
-  if (existMock === undefined) {
+  if (existMock === undefined || existMock.length === 0) {
     console.log('Mock data dosent exxist');
     console.log('Generating MockData');
     generateMockDataFile();
