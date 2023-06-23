@@ -1,16 +1,12 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { GraphQLError } from 'graphql';
+
 import { HookahService } from './hookah.service';
 import { PrismaService } from '../../prisma/service/prisma.service';
 import { PrismaModule } from '../../prisma/prisma.module';
 import { readMockDataFile } from '../../../prisma/mockData/mockDataControler';
 import { UpdateHookahInput } from '../dto/update-hookah.input';
 
-const hookahMock = [
-  {
-    id: 56,
-    name: 'Test',
-  },
-];
 describe('HookahService', () => {
   let service: HookahService;
   let prisma: PrismaService;
@@ -30,14 +26,7 @@ describe('HookahService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
-  it('should return the hookah with the specified id', async () => {
-    const result = await service.findOne(1);
-    expect(result).toEqual({
-      id: 1,
-      mainCategoryId: 1,
-      ...mock[0].hookahs.create[0],
-    });
-  });
+
   it('should return all hookah', async () => {
     const result = await service.findAll();
     expect(result).toEqual(
@@ -46,6 +35,22 @@ describe('HookahService', () => {
         mainCategoryId: 1,
         ...elem,
       })),
+    );
+  });
+
+  it('should return the hookah with the specified id', async () => {
+    const result = await service.findOne(1);
+    expect(result).toEqual({
+      id: 1,
+      mainCategoryId: 1,
+      ...mock[0].hookahs.create[0],
+    });
+  });
+  it('should throw GraphQLError when hookah with the specified id does not exist', async () => {
+    const nonExistingHookahId = -1;
+
+    await expect(service.findOne(nonExistingHookahId)).rejects.toThrow(
+      GraphQLError,
     );
   });
 
@@ -70,6 +75,26 @@ describe('HookahService', () => {
     itemId = createdRes.id;
     expect(createdRes).toEqual({ id: result.id, ...createHookahInput });
   });
+  it('should throw GraphQLError when hookah with name exist', async () => {
+    // Arrange
+    const existHookahInput = {
+      name: 'test',
+      price: 250,
+      mainCategoryId: 1,
+    };
+    const existHookahUpdateInput = {
+      id: itemId,
+      ...existHookahInput,
+    };
+
+    await expect(service.create(existHookahInput)).rejects.toThrow(
+      GraphQLError,
+    );
+    await expect(
+      service.update(itemId, existHookahUpdateInput),
+    ).rejects.toThrow(GraphQLError);
+  });
+
   it('should update a hookah', async () => {
     const updateHookahInput: UpdateHookahInput = {
       id: itemId,
@@ -92,6 +117,20 @@ describe('HookahService', () => {
     expect(updatedRes).toEqual({ id: itemId, ...updateHookahInput });
     // service.remove(itemId);
   });
+  it('should throw GraphQLError when try update hookah with the specified id does not exist', async () => {
+    const nonExistingHookahId = -1;
+    const updateHookahInput: UpdateHookahInput = {
+      id: nonExistingHookahId,
+      name: 'updateTest',
+      price: 250,
+      mainCategoryId: 1,
+    };
+
+    await expect(
+      service.update(nonExistingHookahId, updateHookahInput),
+    ).rejects.toThrow(GraphQLError);
+  });
+
   it('should remove a hookah', async () => {
     const removeHookahInput: UpdateHookahInput = {
       id: itemId,
@@ -102,5 +141,12 @@ describe('HookahService', () => {
 
     const removedRes = await service.remove(itemId);
     expect(removedRes).toEqual({ id: itemId, ...removeHookahInput });
+  });
+  it('should throw GraphQLError when try remove hookah with the specified id does not exist', async () => {
+    const nonExistingHookahId = -1;
+
+    await expect(service.remove(nonExistingHookahId)).rejects.toThrow(
+      GraphQLError,
+    );
   });
 });

@@ -40,6 +40,14 @@ export class HookahService {
 
   async update(id: number, updateHookahInput: UpdateHookahInput) {
     await this.findOne(id);
+    const exsitUser = await this.prosmaService.hookah.findUnique({
+      where: { name: updateHookahInput.name.toLowerCase() },
+    });
+    if (exsitUser) {
+      throw new GraphQLError(
+        `Hookah with name: "${updateHookahInput.name}" alredy exist`,
+      );
+    }
     return await this.prosmaService.hookah.update({
       where: { id },
       data: { ...updateHookahInput },
