@@ -9,7 +9,9 @@ export class AssortmentResolver {
   constructor(private readonly assortmentService: AssortmentService) {}
 
   @Mutation(() => Assortment)
-  createAssortment(@Args('createAssortmentInput') createAssortmentInput: CreateAssortmentInput) {
+  createAssortment(
+    @Args('createAssortmentInput') createAssortmentInput: CreateAssortmentInput,
+  ) {
     return this.assortmentService.create(createAssortmentInput);
   }
 
@@ -24,8 +26,13 @@ export class AssortmentResolver {
   }
 
   @Mutation(() => Assortment)
-  updateAssortment(@Args('updateAssortmentInput') updateAssortmentInput: UpdateAssortmentInput) {
-    return this.assortmentService.update(updateAssortmentInput.id, updateAssortmentInput);
+  updateAssortment(
+    @Args('updateAssortmentInput') updateAssortmentInput: UpdateAssortmentInput,
+  ) {
+    return this.assortmentService.update(
+      updateAssortmentInput.id,
+      updateAssortmentInput,
+    );
   }
 
   @Mutation(() => Assortment)

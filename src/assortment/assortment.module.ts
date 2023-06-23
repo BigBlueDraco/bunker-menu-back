@@ -3,6 +3,6 @@ import { AssortmentService } from './service/assortment.service';
 import { AssortmentResolver } from './resolver/assortment.resolver';
 
 @Module({
-  providers: [AssortmentResolver, AssortmentService]
+  providers: [AssortmentResolver, AssortmentService],
 })
 export class AssortmentModule {}

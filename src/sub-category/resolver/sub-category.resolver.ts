@@ -9,23 +9,32 @@ export class SubCategoryResolver {
   constructor(private readonly subCategoryService: SubCategoryService) {}
 
   @Mutation(() => SubCategory)
-  createSubCategory(@Args('createSubCategoryInput') createSubCategoryInput: CreateSubCategoryInput) {
+  createSubCategory(
+    @Args('createSubCategoryInput')
+    createSubCategoryInput: CreateSubCategoryInput,
+  ) {
     return this.subCategoryService.create(createSubCategoryInput);
   }
 
-  @Query(() => [SubCategory], { name: 'subCategory' })
+  @Query(() => [SubCategory], { name: 'getAllSubCategories' })
   findAll() {
     return this.subCategoryService.findAll();
   }
 
-  @Query(() => SubCategory, { name: 'subCategory' })
+  @Query(() => SubCategory, { name: 'getSubCategory' })
   findOne(@Args('id', { type: () => Int }) id: number) {
     return this.subCategoryService.findOne(id);
   }
 
   @Mutation(() => SubCategory)
-  updateSubCategory(@Args('updateSubCategoryInput') updateSubCategoryInput: UpdateSubCategoryInput) {
-    return this.subCategoryService.update(updateSubCategoryInput.id, updateSubCategoryInput);
+  updateSubCategory(
+    @Args('updateSubCategoryInput')
+    updateSubCategoryInput: UpdateSubCategoryInput,
+  ) {
+    return this.subCategoryService.update(
+      updateSubCategoryInput.id,
+      updateSubCategoryInput,
+    );
   }
 
   @Mutation(() => SubCategory)
